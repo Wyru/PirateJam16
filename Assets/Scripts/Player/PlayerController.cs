@@ -12,16 +12,26 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private Vector2 moveInput;
     private Vector3 currentVelocity;
+    private GameManager gameManager;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        gameManager = FindAnyObjectByType<GameManager>();
         rb.freezeRotation = true;
     }
 
     void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) // Change KeyCode.Space to the desired key
+        {
+            gameManager.ApplyDamageToPlayer(10);
+        }
     }
 
     void FixedUpdate()
@@ -59,4 +69,6 @@ public class PlayerController : MonoBehaviour
             transform.LookAt(lookAtPoint);
         }
     }
+
+    
 }

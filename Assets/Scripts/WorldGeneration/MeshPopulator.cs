@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
-using UnityEngine.AI;
+
 
 
 public class MeshPopulator : MonoBehaviour
@@ -91,6 +90,7 @@ public class MeshPopulator : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(new Vector3(JigglePos(transform.localPosition.x + x), 5f, JigglePos(transform.localPosition.z + z)), -Vector3.up, out hit))
                 {
+                    Debug.Log("AQUI FIRST");
                     if (hit.transform.gameObject.name.Contains("Terrain"))
                     {
                         Debug.Log("AQUI");
@@ -98,10 +98,10 @@ public class MeshPopulator : MonoBehaviour
                         if (noiseMap[x, z] < value)
                         {
                             GameObject newObject = Instantiate(islands[Random.Range(0, islands.Length)], transform);
-                            // newObject.transform.position = new Vector3(JigglePos(transform.localPosition.x + x), hit.point.y, JigglePos(transform.localPosition.z + z));
+                            newObject.transform.position = new Vector3(JigglePos(transform.localPosition.x + x), .2f, JigglePos(transform.localPosition.z + z));
                             // newObject.transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal);
-                            // newObject.transform.rotation = newObject.transform.rotation * Quaternion.Euler(0, Random.Range(0, 360f), 0);
-                            // newObject.transform.localScale = Vector3.one * Random.Range(.8f, 1.2f);
+                            newObject.transform.rotation = Quaternion.Euler(newObject.transform.rotation.x, Random.Range(0, 360f), newObject.transform.rotation.z);
+                            newObject.transform.localScale = new Vector3(255f, 255f, 85) * Random.Range(.8f, 1.2f);
                         }
                     }
                 }
@@ -111,7 +111,7 @@ public class MeshPopulator : MonoBehaviour
 
     float JigglePos(float f)
     {
-        f += Random.Range(-0.1f, 0.1f);
+        f += Random.Range(-10f,10f);
         return f;
     }
 }

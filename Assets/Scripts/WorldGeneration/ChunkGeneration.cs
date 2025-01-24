@@ -41,9 +41,6 @@ public class ChunkGeneration : MonoBehaviour
         // playerTransform.position = new Vector3(playerTransform.position.x * Random.Range(1f, numberOfChunks) * ChunkWidth(), 5f, playerTransform.position.z * Random.Range(1f, numberOfChunks) * ChunkWidth());
         //playerTransform.position = new Vector3(10f, 10f, 10f);
 
-        // pf = FindObjectOfType<newPfScript>();
-        // cGrid = FindObjectOfType<newCellGrid>();
-
         StartCoroutine(CreateChunks());
     }
 
@@ -82,7 +79,7 @@ public class ChunkGeneration : MonoBehaviour
             for (int z = 0; z < numberOfChunks; z++)
             {
                 GameObject terrain = Instantiate(terrainPrefab, new Vector3(x * ChunkWidth(), 0f, z * ChunkWidth()), Quaternion.identity);
-                terrain.name = "Terain" + new Vector2(x, z) * ChunkWidth();
+                terrain.name = "Terrain" + new Vector2(x, z) * ChunkWidth();
                 terrain.transform.parent = transform;
                 terrainList.Add(terrain);
                 UpdateChunkVisibilityTo(false, x, z);
